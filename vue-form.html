@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-template</title>
+</head>
+<body>
+    <div id="app">
+
+        <input v-model.trim="msg" />{{msg}}
+        <hr>
+
+        <input type="checkbox" id="checkbox" v-model="checked" /> 男 {{checked}}
+
+        <div id="v-model-radiobutton">
+            <input type="radio" id="one" value="One" v-model="picked" />
+            <label for="one">One</label>
+            <br />
+            <input type="radio" id="two" value="Two" v-model="picked" />
+            <label for="two">Two</label>
+            <br />
+            <span>Picked: {{ picked }}</span>
+          </div>
+
+          <div id="v-model-select" class="demo">
+            <select v-model="selected">
+              <option disabled value="">Please select one</option>
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+          </div>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let Root = {
+            data() {
+                return {
+                    checked: true,
+                    picked: 'Two',
+                    selected: '',
+                    msg: '',
+                }
+            },
+        }
+
+        const app = Vue.createApp(Root);
+
+        const vm = app.mount("#app");
+
+    </script>
+    
+</body>
+</html>

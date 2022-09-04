@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-condition</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="type === 'A'">
+            A
+          </div>
+          <div v-else-if="type === 'B'">
+            B
+          </div>
+          <div v-else-if="type === 'C'">
+            C
+          </div>
+          <div v-else>
+            Not A/B/C
+          </div>
+
+          <div v-show="show">
+            show
+          </div>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let Root = {
+            data() {
+                return {
+                    type: 'D',
+                    show: false,
+                }
+            },
+        }
+
+        const app = Vue.createApp(Root);
+
+        const vm = app.mount("#app");
+
+    </script>
+    
+</body>
+</html>

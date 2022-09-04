@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-template</title>
+</head>
+<body>
+    <div id="app">
+        <span>{{message.split(' ')[0].length == 0}}</span><br>
+        <span v-once>{{message + 'xxx'}}</span><br>
+        <button v-on:click="change">修改message</button><br>
+
+        <div>{{html}}</div>
+        <div v-html="html"></div>
+
+            <hr>
+        <button v-bind:name="isButtonDisabled" v-bind:disabled="isButtonDisabled">按钮</button>
+
+        <p v-if="seen()">现在你看到我了</p>
+    </div>
+
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let Root = {
+            data() {
+                return {
+                    message:'hello vue!',
+                    html:'<h1>html</h1>',
+                    isButtonDisabled:true,
+                    
+                }
+            },
+            methods: {
+                change(){
+                    this.message = "change"
+                },
+                seen(){
+                    return false
+                }
+            },
+        }
+
+        const app = Vue.createApp(Root);
+
+        const vm = app.mount("#app");
+
+    </script>
+    
+</body>
+</html>

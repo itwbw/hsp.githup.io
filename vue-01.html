@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="counter">
+        <!-- 组件传递参数 -->
+        <ol id="todlist">
+            <!-- 创建一个 todo-item 组件实例 -->
+            <todo-item v-for="todoItem in todos" v-bind:todo="todoItem"></todo-item>
+
+        </ol>
+
+
+        <!-- 组件 -->
+        <ol>
+            <!-- 创建一个 todo-item 组件实例 -->
+            <!-- <todo-item></todo-item>
+            <todo-item></todo-item>
+            <todo-item></todo-item> -->
+        </ol>
+
+        <hr>
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+
+        <hr>
+        <div v-if="show">
+            11111
+        </div>
+        <button @click="show = false">show</button>
+
+        <hr>
+        <span v-bind:title="msg">
+            Counter: {{ counter }}
+        </span>
+        <button @click="plus10">加10</button>
+
+        <!-- 双向绑定 -->
+        <hr>
+        <p>{{ message }}</p>
+        <input v-model="formData.username" />
+        <input v-model="formData.password" />
+        <br>
+        <button @click="submit">提交</button>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        //定义一个组件,可以是bar
+        const TodoItem = {
+
+            props: ['todo'],
+            template: `<div>
+                <li>{{todo.text}}---{{ user }}</li>
+                <button v-on:click='submit'>按钮</button>
+                </div>`,
+            data() {
+                return {
+                    user: 'tom',
+                }
+            },
+            methods: {
+                submit(){
+                    console.log('hello component')
+                }
+            }
+        }
+
+        const Counter = {
+            //加载组件
+            components: {
+                TodoItem,
+            },
+
+            data() {
+                return {
+                    counter: 0,
+                    msg: 'hello vue',
+                    message: '123ss',
+                    formData: {
+                        username: 'wbw',
+                        password: 123
+                    },
+                    show: true,
+                    todos: [
+                        { text: '起床' },
+                        { text: '吃饭' },
+                        { text: '学习' }
+                    ]
+                }
+            },
+            beforeCreate() {
+              console.log('beforeCreate-----'+ this.counter)  
+              console.log(document.getElementById("todlist"))  
+            },
+            created() {
+                console.log('created-----'+ this.counter)
+              console.log(document.getElementById("todlist"))  
+
+            },
+            beforeMount() {
+                console.log('beforeMount-----'+ this.counter)
+              console.log(document.getElementById("todlist"))  
+
+            },
+            mounted() {
+                console.log('mounted-----'+ this.counter)
+              console.log(document.getElementById("todlist"))  
+
+                setInterval(() => {
+                    this.counter++
+                }, 1000)
+            },
+            methods: {
+                plus10() {
+                    this.counter += 10
+                },
+                submit() {
+                    console.log(JSON.stringify(this.formData))
+                }
+            }
+        }
+
+        Vue.createApp(Counter).mount('#counter')
+    </script>
+
+</body>
+
+</html>

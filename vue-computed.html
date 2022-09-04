@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-template</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>Has published books:</p>
+        <span>{{publishedBooksMessage }}</span><br>
+        <span>{{publishedBooksMessage }}</span><br>
+        <span>{{date }}</span><br>
+        <span>{{publishedBooksNumber() }}</span><br>
+        <span>{{publishedBooksNumber() }}</span><br>
+
+        <hr>
+        <input v-model="firstName">
+        <input v-model="lastName"><br>
+        fullName: {{fullName}}
+        fullName: {{fullName2}}
+
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let Root = {
+            data() {
+                return {
+                    author: {
+                        name: 'John Doe',
+                        books: [
+                            'Vue 2 - Advanced Guide',
+                            'Vue 3 - Basic Guide',
+                            'Vue 4 - The Mystery'
+                        ]
+                    },
+                    firstName: '张',
+                    lastName: '三',
+                    fullName: '张楠',
+                }
+            },
+            methods: {
+                publishedBooksNumber() {
+                    return this.author.books.length
+                },
+            },
+            watch: {
+                firstName(newData, oldData) {
+                    this.fullName = newData + ' ' + this.lastName
+                },
+                lastName(newData, oldData) {
+                    this.fullName = this.firstName + ' ' + newData
+
+                },
+
+            },
+            mounted() {
+                setInterval(() => {
+                    this.author.books.push('王必文');
+                }, 1000)
+            },
+            computed: {
+                publishedBooksMessage() {
+                    return this.author.books.length
+                },
+                date() {
+                    return new Date;
+                },
+
+                fullName2(){
+                    return this.firstName + this.lastName
+                }
+            }
+        }
+
+        const app = Vue.createApp(Root);
+
+        const vm = app.mount("#app");
+
+    </script>
+
+</body>
+
+</html>

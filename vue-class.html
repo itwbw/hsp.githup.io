@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-template</title>
+    <style type="text/css">
+        .box {
+            width: 100px;
+            height: 100px;
+        }
+
+        .active {
+            background-color: rebeccapurple;
+        }
+
+        .danger {
+            color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- active是一个样式 isActive是我们定义的一个变量 -->
+        <div :class="{active: isActive,danger: isError}" class="box">
+            hello vue
+        </div>
+        <div :class="[active2,danger2]" class="box">
+            hello vue
+        </div>
+        <button @click="active">按钮</button>
+
+        <!-- 使用组件 -->
+        <my-component :class="[active2,danger2]"></my-component>
+
+
+        <div :style="{color: fontColor, fontSize: fontSize}">
+            内联样式
+        </div>
+
+        <div :style="myStyle">
+            内联样式
+        </div>
+
+        <div :style="[myStyle,myStyle2]">
+            内联样式
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let myComponent = {
+            template: `<p class="foo bar">Hi!</p>`,
+            data() {
+                return {
+
+                }
+            },
+        }
+
+        let Root = {
+            data() {
+                return {
+                    isActive: false,
+                    isError: false,
+                    active2: 'active',
+                    danger2: 'danger',
+                    fontColor: 'green',
+                    fontSize: '26px',
+                    myStyle: {
+                        color: 'green',
+                        fontSize: '26px',
+                    },
+                    myStyle2:{
+                        background:'black',
+                    }
+                }
+            },
+            methods: {
+                active() {
+                    this.isActive = !this.isActive;
+                    this.isError = !this.isError;
+                    this.active2 = '';
+                }
+            },
+        }
+
+        const app = Vue.createApp(Root);
+        app.component("my-component", myComponent)
+
+        const vm = app.mount("#app");
+
+    </script>
+
+</body>
+
+</html>

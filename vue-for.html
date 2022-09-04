@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-template</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) of goods">
+                {{index + 1}}----{{item.name}}----{{item.price}}
+            </li>
+        </ul>
+
+        <ul id="v-for-object" class="demo">
+            <li v-for="(value,name,index) in myObject">
+          {{index}} --- {{name}} --- {{ value }}
+            </li>
+          </ul>
+
+          <span v-for="(n,index) in 10" :key="n">{{ index }} -- {{n}}  </span>
+
+          <li v-for="todo in todos" >
+            <template v-if="todo.isComplate">
+                {{ todo.name }}
+            </template>
+           
+          </li>
+
+
+    </div>
+
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        let Root = {
+            data() {
+                return {
+                    goods: [
+                        { name: '香皂', price: 3 },
+                        { name: '晾衣架', price: 2 },
+                        { name: '方面', price: 1 },
+                    ],
+                    myObject: {
+                        title: 'How to do lists in Vue',
+                        author: 'Jane Doe',
+                        publishedAt: '2016-04-10'
+                    },
+                    todos:[{name: '吃饭',isComplate:true},{name: '睡觉',isComplate:false}]
+                }
+            },
+        }
+
+        const app = Vue.createApp(Root);
+
+        const vm = app.mount("#app");
+
+    </script>
+
+</body>
+
+</html>
